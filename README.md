@@ -98,8 +98,8 @@ Our platform operates on a hybrid revenue model:
 
 ## 👥 Development Team
 
-- Mohamed elamine ali zergaoui
-- Ainouche abderahmane
+- Mohamed Elamine Ali Zergaoui
+- Ainouche Abderahmane
 
 ---
 
