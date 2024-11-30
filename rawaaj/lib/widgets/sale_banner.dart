@@ -11,7 +11,7 @@ class SaleBanner extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         child: Container(
           color: Colors.yellow[700],
-          height: 120,
+          height: 160,
           child: Stack(
             alignment: Alignment.center,
             children: [
@@ -20,7 +20,7 @@ class SaleBanner extends StatelessWidget {
                 child: Text(
                   'Big Sale',
                   style: TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
+                      fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ),
               Positioned(

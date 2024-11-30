@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/widgets/header_bar.dart';
 import '../widgets/sale_banner.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/flash_sale_slider.dart';
-import '../widgets/section_header.dart';
 import '../widgets/grid_section.dart';
 import '../widgets/bottom_nav_bar.dart';
 
@@ -13,21 +13,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: const Text('Shop', style: TextStyle(color: Colors.black)),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_alt_outlined, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      backgroundColor: Colors.white,
+      appBar: HeaderBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
