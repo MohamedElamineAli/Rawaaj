@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/screens/filter_screen.dart';
 import 'screens/home_screen.dart';
 import 'themes/app_theme.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(),
+      home: const FilterScreen(),
       theme: appTheme,
       debugShowCheckedModeBanner: false,
     );
