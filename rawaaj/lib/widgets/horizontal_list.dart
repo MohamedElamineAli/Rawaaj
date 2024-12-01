@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/widgets/product_card.dart';
 import 'section_header.dart';
 
 class HorizontalListSection extends StatelessWidget {
@@ -18,25 +19,17 @@ class HorizontalListSection extends StatelessWidget {
           SectionHeader(title: title),
           const SizedBox(height: 8),
           SizedBox(
-            height: 120,
+            height: 235,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: itemsCount,
               itemBuilder: (context, index) {
-                return Container(
-                  width: 100,
-                  margin: const EdgeInsets.only(right: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.image, size: 50),
-                      const SizedBox(height: 4),
-                      Text("Item ${index + 1}"),
-                    ],
+                return SizedBox(
+                  width: 160, // Adjust to your desired card width
+                  child: ProductCard(
+                    imageUrl: 'https://via.placeholder.com/150',
+                    title: "Item ${index + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu",
+                    price: "150 DZD",
                   ),
                 );
               },

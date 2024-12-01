@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/themes/colors.dart';
+import 'package:rawaaj/themes/icons.dart';
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({Key? key}) : super(key: key);
+  final int selected;
+
+  const BottomNavBar({Key? key, required this.selected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var lastNavBarIcons = navBarIcons;
+    lastNavBarIcons.replaceRange(selected, selected+1, [selectedNavBarIcons[selected]]);
     return BottomNavigationBar(
+      backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorites"),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: "Cart"),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      items: [
+        for(int i=0; i<5; i++) BottomNavigationBarItem(icon: navBarIcons[i], label: ""),
       ],
     );
   }
