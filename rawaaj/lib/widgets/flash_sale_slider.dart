@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:rawaaj/databases/database_consts.dart';
+import 'package:rawaaj/screens/porduct_screen.dart';
 import 'package:rawaaj/themes/colors.dart';
 
 class FlashSaleSlider extends StatelessWidget {
@@ -9,28 +11,32 @@ class FlashSaleSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, dynamic>> flashSaleItems = [
       {
-        "name": "Item 1",
-        "price": "2000 DZD",
+        "id": 6,
+        "name": products[6].description,
+        "price": "${products[6].price} DZD",
         "discount": "-20%",
-        "img": "https://via.placeholder.com/150"
+        "img": products[6].image
       },
       {
-        "name": "Item 2",
-        "price": "3000 DZD",
-        "discount": "-20%",
-        "img": "https://via.placeholder.com/150"
+        "id": 11,
+        "name": products[11].description,
+        "price": "${products[11].price} DZD",
+        "discount": "-10%",
+        "img": products[11].image
       },
       {
-        "name": "Item 3",
-        "price": "4000 DZD",
-        "discount": "-20%",
-        "img": "https://via.placeholder.com/150"
+        "id": 22,
+        "name": products[22].description,
+        "price": "${products[22].price} DZD",
+        "discount": "-42%",
+        "img": products[22].image
       },
       {
-        "name": "Item 4",
-        "price": "5000 DZD",
-        "discount": "-20%",
-        "img": "https://via.placeholder.com/150"
+        "id": 40,
+        "name": products[40].description,
+        "price": "${products[40].price} DZD",
+        "discount": "-32%",
+        "img": products[40].image
       },
     ];
 
@@ -71,88 +77,93 @@ class FlashSaleSlider extends StatelessWidget {
               viewportFraction: 0.8,
             ),
             items: flashSaleItems.map((item) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                        offset: const Offset(0, 4), // Shadow position
-                      ),
-                    ],
-                  ),
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: Container(
-                          child: Center(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      item["img"],
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => ProductScreen(id: item["id"]),) );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          blurRadius: 8,
+                          spreadRadius: 2,
+                          offset: const Offset(0, 4), // Shadow position
+                        ),
+                      ],
+                    ),
+                    child: Stack(
+                      children: [
+                        Positioned.fill(
+                          child: Container(
+                            child: Center(
+                                child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        item["img"],
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, bottom: 5.0),
-                                child: Text(
-                                  item["name"],
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, bottom: 5.0),
+                                  child: Text(
+                                    item["name"],
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, bottom: 5.0),
-                                child: Text(
-                                  item["price"],
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, bottom: 5.0),
+                                  child: Text(
+                                    item["price"],
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )),
-                        ),
-                      ),
-                      Positioned(
-                        top: 10,
-                        right: 10,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(8),
+                              ],
+                            )),
                           ),
-                          child: Text(
-                            item["discount"],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              item["discount"],
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

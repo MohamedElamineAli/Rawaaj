@@ -1,23 +1,50 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:rawaaj/widgets/product_card.dart';
+import '../databases/database_consts.dart';
 import 'section_header.dart';
 
 class GridSection extends StatelessWidget {
   final String title;
   final int itemsCount;
+  final double gridPadding;
+  final bool isSpecial;
 
-  const GridSection({Key? key, required this.title, required this.itemsCount})
+  const GridSection(
+      {Key? key,
+      required this.title,
+      required this.itemsCount,
+      this.gridPadding = 16,
+      this.isSpecial = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int r = Random().nextInt(47) + 1;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      padding: EdgeInsets.symmetric(horizontal: gridPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionHeader(title: title),
-          const SizedBox(height: 8),
+          isSpecial
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(title,
+                          style: const TextStyle(
+                              fontSize: 24, fontWeight: FontWeight.bold)),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.close))
+                    ],
+                  ),
+                )
+              : SectionHeader(title: title),
           GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -30,9 +57,10 @@ class GridSection extends StatelessWidget {
             itemCount: itemsCount,
             itemBuilder: (context, index) {
               return ProductCard(
-                imageUrl: 'https://via.placeholder.com/150',
-                title: "Item ${index + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu",
-                price: "150 DZD",
+                id: (index + r)%47,
+                img: products[(index + r)%47].image,
+                title: products[(index + r)%47].description,
+                price: "${products[(index + r)%47].price} DZD",
               );
             },
           ),

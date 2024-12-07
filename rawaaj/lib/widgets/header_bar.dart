@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/screens/filter_screen.dart';
 import 'package:rawaaj/themes/colors.dart';
 
 class HeaderBar extends StatefulWidget implements PreferredSizeWidget {
-  const HeaderBar({Key? key}) : super(key: key);
+  final String title;
+  final bool isFiltered;
+
+  const HeaderBar({Key? key, required this.title, required this.isFiltered}) : super(key: key);
 
   @override
   State<HeaderBar> createState() => _HeaderBarState();
@@ -14,7 +18,10 @@ class HeaderBar extends StatefulWidget implements PreferredSizeWidget {
 class _HeaderBarState extends State<HeaderBar> {
   @override
   Widget build(BuildContext context) {
+    bool isFiltered = widget.isFiltered;
+
     return AppBar(
+      automaticallyImplyLeading: false,
       elevation: 0,
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
@@ -26,8 +33,8 @@ class _HeaderBarState extends State<HeaderBar> {
           children: [
             Row(
               children: [
-                const Text(
-                  'Shop',
+                Text(
+                  widget.title,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
@@ -43,9 +50,10 @@ class _HeaderBarState extends State<HeaderBar> {
                         hintText: "Search",
                         suffixIcon: GestureDetector(
                           onTap: () {
-                            print("Filter button clicked");
+                            if(!isFiltered) return;
+                            Navigator.push( context, MaterialPageRoute(builder: (context) => FilterScreen()), );
                           },
-                          child: const Icon(Icons.filter_alt_outlined, color: primaryColor),
+                          child: Icon(Icons.filter_alt_outlined, color: isFiltered ? primaryColor : Colors.transparent),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rawaaj/widgets/header_bar.dart';
+import '../widgets/add_floating_btn.dart';
 import '../widgets/sale_banner.dart';
 import '../widgets/category_grid.dart';
 import '../widgets/horizontal_list.dart';
 import '../widgets/flash_sale_slider.dart';
 import '../widgets/grid_section.dart';
-import '../widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,8 +13,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: AddFloatingBtn(isProduct: false),
       backgroundColor: Colors.white,
-      appBar: HeaderBar(),
+      appBar: HeaderBar(
+        title: "Shop",
+        isFiltered: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +39,6 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(selected: 0,),
     );
   }
 }
