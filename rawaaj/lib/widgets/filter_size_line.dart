@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
-class FilterSizeLine extends StatelessWidget {
-  final int selected;
+class FilterSizeLine extends StatefulWidget {
 
-  const FilterSizeLine({Key? key, this.selected = 2}) : super(key: key);
+  FilterSizeLine({Key? key}) : super(key: key);
+
+  @override
+  State<FilterSizeLine> createState() => _FilterSizeLineState();
+}
+
+class _FilterSizeLineState extends State<FilterSizeLine> {
+  int selected = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,13 @@ class FilterSizeLine extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 for (int i = 0; i < sizesList.length; i++)
-                  buildSizeElement(sizesList[i], i),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selected = i;
+                      });
+                    },
+                    child: buildSizeElement(sizesList[i], i)),
               ],
             ),
           ))

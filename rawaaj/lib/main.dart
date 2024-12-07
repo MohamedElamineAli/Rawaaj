@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:rawaaj/screens/filter_screen.dart';
-import 'screens/home_screen.dart';
+import 'package:rawaaj/screens/login_screen.dart';
+import 'package:rawaaj/screens/main_screen.dart';
+import 'package:rawaaj/screens/password_screen.dart';
+import 'package:rawaaj/screens/settings_screen.dart';
+import 'package:rawaaj/screens/welcome_screen.dart';
+// import 'screens/welcome_screen.dart';
+import 'screens/create_account_screen.dart';
 import 'themes/app_theme.dart';
 
 void main() {
@@ -13,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const FilterScreen(),
+      home: WelcomeScreen(),
       theme: appTheme,
       debugShowCheckedModeBanner: false,
     );

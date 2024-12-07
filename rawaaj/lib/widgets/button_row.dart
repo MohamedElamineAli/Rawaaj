@@ -11,27 +11,30 @@ class ButtonRow extends StatelessWidget {
         OutlinedButton(
           onPressed: () {},
           style: OutlinedButton.styleFrom(
-            side: BorderSide(color: Colors.blue),
+            side: BorderSide(color: Colors.blue, width: 2.5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
           ),
           child: const Text(
             'Clear',
-            style: TextStyle(color: Colors.blue),
+            style: TextStyle(color: Colors.blue, fontSize: 22, fontWeight: FontWeight.w400),
           ),
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+        SizedBox(width: 8,),
+        Expanded(
+          child: ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 12),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+            child: const Text('Apply', style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w400),),
           ),
-          child: const Text('Apply'),
         ),
       ],
     );
