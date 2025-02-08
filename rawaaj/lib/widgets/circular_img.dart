@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 class CircularImg extends StatelessWidget {
-  final String img;
+  final File img;
   final double radius;
   const CircularImg({super.key, required this.img, this.radius = 40});
 
@@ -26,7 +27,7 @@ class CircularImg extends StatelessWidget {
           ],
         ),
         child: ClipOval(
-          child: Image.asset(
+          child: Image.file(
             img,
             fit: BoxFit.cover,
           ),

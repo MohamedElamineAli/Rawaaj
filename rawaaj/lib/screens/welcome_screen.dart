@@ -18,29 +18,16 @@ class WelcomeScreen extends StatelessWidget {
               const Spacer(),
               // Logo Container
               Container(
-                width: 120,
-                height: 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                width: 160,
+                height: 160,
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.1),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
                 ),
-                child: const Center(
-                  child: Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 50,
-                    color: Color(0xFF004BFE),
-                  ),
+                child: Center(
+                  child: Image.asset("assets/icons/rawaaj.png", height: 110,),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 8),
               // App Name
               const Text(
                 'Rawaaj',
@@ -68,7 +55,11 @@ class WelcomeScreen extends StatelessWidget {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push( context, MaterialPageRoute(builder: (context) => MainScreen(),) );
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainScreen()),
+                          (Route<dynamic> route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF004BFE),
@@ -89,7 +80,7 @@ class WelcomeScreen extends StatelessWidget {
               // Sign in Text Button
               GestureDetector(
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => CreateAccountScreen(),) );
+                  Navigator.push( context, MaterialPageRoute(builder: (context) => const CreateAccountScreen(),) );
                 },
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,

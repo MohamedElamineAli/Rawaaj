@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:rawaaj/screens/porduct_screen.dart';
+import 'package:rawaaj/screens/product_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final int id;
-  final String img;
+  final File img;
   final String title;
   final String price;
 
@@ -42,7 +44,7 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  child: Image.asset(
+                  child: Image.file(
                     img,
                     width: double.infinity,
                     fit: BoxFit.cover,

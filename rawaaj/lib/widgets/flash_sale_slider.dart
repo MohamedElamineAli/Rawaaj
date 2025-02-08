@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:rawaaj/databases/database_consts.dart';
-import 'package:rawaaj/screens/porduct_screen.dart';
+import 'package:rawaaj/screens/product_screen.dart';
 import 'package:rawaaj/themes/colors.dart';
 
 class FlashSaleSlider extends StatelessWidget {

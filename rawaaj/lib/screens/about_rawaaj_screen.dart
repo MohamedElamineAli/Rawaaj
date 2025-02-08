@@ -11,33 +11,32 @@ class AboutRawaajScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // App Icon
+            SizedBox(height: 64),
+
             Center(
-              child: Icon(
-                Icons.shopping_bag_rounded,
-                size: 120,
-                color: Colors.blue,
+              child: Image.asset(
+                "assets/icons/rawaaj.png",
+                height: 110,
               ),
             ),
-            SizedBox(height: 24),
 
+            SizedBox(height: 64),
             // Title
             Text(
               'About Rawaaj',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 22,
+                fontSize: 28,
               ),
             ),
             SizedBox(height: 16),
 
             // Description
             Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\n'
-                  'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-              textAlign: TextAlign.center,
+              "Rawaaj is your go-to platform for discovering local fashion and transforming the shopping experience. By connecting local clothing stores with shoppers, Rawaaj bridges the gap between traditional retail and modern digital convenience. Our app offers real-time inventory updates, price comparisons, and personalized style recommendations, making it easier for you to find unique styles while saving time and effort. Whether you're a busy professional, a parent, or a fashion enthusiast, Rawaaj helps you shop smarter and support local businesses. Together, we celebrate sustainable fashion, community growth, and the joy of discovering something truly special.",
               style: TextStyle(
                 fontSize: 16,
                 height: 1.5,

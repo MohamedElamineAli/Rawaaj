@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rawaaj/screens/password_screen.dart';
+import 'package:rawaaj/utils/get_password_util.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -8,6 +9,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    // Controller for the username field
+    final TextEditingController _usernameController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -31,7 +36,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: screenHeight/3.4),
+                      SizedBox(height: screenHeight / 3.4),
                       const Text(
                         'Login',
                         style: TextStyle(
@@ -60,8 +65,9 @@ class LoginScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 30),
                       TextField(
+                        controller: _usernameController,
                         decoration: InputDecoration(
-                          hintText: 'Email',
+                          hintText: 'Username',
                           hintStyle: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                           ),
@@ -82,8 +88,42 @@ class LoginScreen extends StatelessWidget {
                         width: double.infinity,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push( context, MaterialPageRoute(builder: (context) => PasswordScreen(),) );
+                          onPressed: () async {
+                            final username = _usernameController.text.trim();
+                            if (username.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Please enter a username.'),
+                                ),
+                              );
+                              return;
+                            }
+
+
+                            try {
+                              final res = await getPassword(username);
+                              if(!res['exists']) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Wrong username.'),
+                                  ),
+                                );
+                                return;
+                              }
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PasswordScreen(username: username, password: res['password'],),
+                                ),
+                              );
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Error: $e'),
+                                ),
+                              );
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF004BFE),

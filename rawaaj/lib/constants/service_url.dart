@@ -1,0 +1,1 @@
+const serviceUrl = 'http://192.168.87.99:8000';

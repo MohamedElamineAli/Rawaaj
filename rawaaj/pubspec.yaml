@@ -37,10 +37,17 @@ dependencies:
   latlong2:
   flutter_map:
   pinput:
-#  flutter_svg:
-#  image_picker:
-#  google_fonts:
+  get:
   intl_phone_number_input:
+  flutter_bloc:
+  sqflite:
+  path:
+  image_picker:
+  supabase_flutter:
+  geolocator:
+  connectivity_plus:
+  shared_preferences:
+  flutter_compass:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -49,6 +56,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.14.2"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -56,6 +64,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+
+flutter_launcher_icons:
+  android: "ic_launcher"
+  ios: true
+  image_path: "assets/icon/icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/icon.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -100,3 +116,4 @@ flutter:
   # see https://flutter.dev/to/font-from-package
   assets:
     - assets/images/
+    - assets/icons/

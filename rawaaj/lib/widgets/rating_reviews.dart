@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/constants/default_cubit_product.dart';
 import 'package:rawaaj/screens/add_review_screen.dart';
 import 'package:rawaaj/widgets/circular_img.dart';
 import 'package:rawaaj/widgets/custom_chip.dart';
@@ -7,7 +8,9 @@ import 'package:rawaaj/widgets/review_line.dart';
 import 'package:rawaaj/widgets/section_header.dart';
 
 class RatingReviews extends StatelessWidget {
-  final double rating = 3.7;
+  final double rating;
+
+  const RatingReviews({super.key, required this.rating});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,7 @@ class RatingReviews extends StatelessWidget {
         ),
         SizedBox(height: 16),
         ReviewLine(
-            img: "assets/images/grey.png",
+            img: greyImage,
             name: "Amine",
             rating: rating,
             comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."

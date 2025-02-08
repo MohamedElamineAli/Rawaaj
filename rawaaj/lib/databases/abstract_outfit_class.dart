@@ -1,4 +1,4 @@
-abstract class Outfit {
+abstract class Outfit2 {
   final int id;
   final String outfitImage;
   final int numOfLikes;
@@ -6,7 +6,7 @@ abstract class Outfit {
   final String description;
   final List<int> outfitComponents; // Product IDs
 
-  Outfit({
+  Outfit2({
     required this.id,
     required this.outfitImage,
     required this.numOfLikes,

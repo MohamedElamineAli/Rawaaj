@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rawaaj/widgets/bottom_nav_bar.dart';
 import 'package:rawaaj/widgets/clothes_list.dart';
 import 'package:rawaaj/widgets/header_bar.dart';
 
@@ -10,7 +9,7 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       appBar: HeaderBar(
         title: "Wishlist",
@@ -18,7 +17,7 @@ class WishlistScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 12.0),
+          padding: EdgeInsets.only(left: 12.0),
           child: Column(
             children: [
               OutfitLine(

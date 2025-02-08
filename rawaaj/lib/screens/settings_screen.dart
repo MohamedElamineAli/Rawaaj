@@ -31,9 +31,10 @@ class SettingsScreen extends StatelessWidget {
                     },
                   ),
                   SettingsItem(
-                    title: 'Shipping Address',
+                    title: 'Location',
+                    trailingText: 'Sidi abdellah',
                     onTap: () {
-                      Navigator.push( context, MaterialPageRoute(builder: (context) => AddressEditScreen(),) );
+                      Navigator.push( context, MaterialPageRoute(builder: (context) => LocationEditScreen(),) );
                     },
                   ),
                   SettingsItem(

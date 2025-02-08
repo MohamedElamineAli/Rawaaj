@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(height: 16,),
               HorizontalListSection(title: "Recently Viewed", itemsCount: 6, padding: 0,),
               SizedBox(height: 16,),
-              OutfitLine(title: "Related Outfits"),
+              OutfitLine(title: "Recently Viewed Outfits"),
               SizedBox(height: 16,),
             ],
           ),

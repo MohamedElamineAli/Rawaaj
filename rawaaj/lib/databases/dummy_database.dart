@@ -16,17 +16,19 @@ class DummyDatabase {
     };
 
     int productId = 1; // Starting product ID
+    int categoryId = 0;
     List<Map<String, dynamic>> productData = [];
 
     categories.forEach((category, data) {
       final count = data["count"] as int; // Explicitly cast to int
       final extension = data["extension"] as String; // Explicitly cast to String
+      categoryId++;
 
       for (int i = 1; i <= count; i++) {
         productData.add({
           "id": productId++,
           "image": "assets/images/${category} ($i).$extension",
-          "category": category,
+          "category": categoryId,
           "price": (1500.0 + productId * 50) % 10000, // Random price logic
           "isLiked": productId % 2 == 0, // Alternate like state
           "description": "High-quality ${category.capitalize()} $i.",
@@ -78,7 +80,7 @@ class DummyDatabase {
   });
 
   // Fetch list of products
-  static List<Product> getProducts() {
+  static List<Product2> getProducts() {
     return _productData.map((data) {
       final spec = data["specification"];
       return _ProductImpl(
@@ -96,9 +98,9 @@ class DummyDatabase {
           colors: List<String>.from(spec["colors"]),
         ),
         totalRatings: data["totalRatings"],
-        reviews: List<Review>.from(
+        reviews: List<Review2>.from(
           data["reviews"].map(
-                (review) => Review(
+                (review) => Review2(
               username: review["username"],
               rating: review["rating"],
               comment: review["comment"],
@@ -110,7 +112,7 @@ class DummyDatabase {
   }
 
   // Fetch list of outfits
-  static List<Outfit> getOutfits() {
+  static List<Outfit2> getOutfits() {
     return _outfitData.map((data) {
       return _OutfitImpl(
         id: data["id"],
@@ -125,7 +127,7 @@ class DummyDatabase {
 }
 
 // Private implementation of Product
-class _ProductImpl extends Product {
+class _ProductImpl extends Product2 {
   _ProductImpl({
     required super.id,
     required super.image,
@@ -141,7 +143,7 @@ class _ProductImpl extends Product {
 }
 
 // Private implementation of Outfit
-class _OutfitImpl extends Outfit {
+class _OutfitImpl extends Outfit2 {
   _OutfitImpl({
     required super.id,
     required super.outfitImage,
