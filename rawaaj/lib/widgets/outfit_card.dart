@@ -1,35 +1,23 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:rawaaj/screens/outfits_screen.dart';
-import 'package:rawaaj/screens/outfit_detail_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/outfits_cubit.dart';
+import '../screens/outfit_detail_screen.dart';
 
-class OutfitCard extends StatefulWidget {
+class OutfitCard extends StatelessWidget {
+  final int index;
   final int id;
-  final String img;
-  final int price;
-  final bool isLiked;
+  final File img;
+  final double price;
 
-  const OutfitCard(
-      {
-        super.key,
-        required this.img,
-        required this.price,
-        required this.isLiked,
-        required this.id
-      });
-
-  @override
-  State<OutfitCard> createState() => _OutfitCardState();
-}
-
-class _OutfitCardState extends State<OutfitCard> {
-  bool isLiked = false;
-
-  @override
-  void initState() {
-    super.initState();
-
-    isLiked = widget.isLiked;
-  }
+  const OutfitCard({
+    super.key,
+    required this.index,
+    required this.img,
+    required this.price,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +28,12 @@ class _OutfitCardState extends State<OutfitCard> {
           Expanded(
             child: GestureDetector(
               onTap: () {
-                Navigator.push( context, MaterialPageRoute(builder: (context) => OutfitDetailScreen(id: widget.id,)), );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OutfitDetailScreen(id: id),
+                  ),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.all(3.0),
@@ -56,14 +49,14 @@ class _OutfitCardState extends State<OutfitCard> {
                       color: Colors.grey.withOpacity(0.3),
                       blurRadius: 8,
                       spreadRadius: 2,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    widget.img,
+                  child: Image.file(
+                    img,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
@@ -90,22 +83,32 @@ class _OutfitCardState extends State<OutfitCard> {
               children: [
                 Flexible(
                   child: Text(
-                    "${widget.price} DZD",
+                    '${price.toStringAsFixed(2)} DZD',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isLiked = !isLiked;
-                    });
+                BlocBuilder<OutfitsCubit, OutfitsState>(
+                  builder: (context, state) {
+                    bool currentIsLiked = false;
+
+                    if (state is OutfitsList) {
+                      final outfitList = state.outfitsMap['all'];
+                      currentIsLiked = outfitList?[index].isLiked ?? false;
+                    }
+
+                    return GestureDetector(
+                      onTap: () {
+                        final outfitsCubit = context.read<OutfitsCubit>();
+                        outfitsCubit.toggleOutfitLike(id);
+                      },
+                      child: Icon(
+                        currentIsLiked ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.red,
+                      ),
+                    );
                   },
-                  child: Icon(
-                    isLiked ? Icons.favorite : Icons.favorite_border,
-                    color: Colors.red,
-                  ),
-                )
+                ),
               ],
             ),
           ),

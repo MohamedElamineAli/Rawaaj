@@ -1,73 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/filter_cubit.dart';
 
-class SortButtons extends StatefulWidget {
-  @override
-  _SortButtonsState createState() => _SortButtonsState();
-}
-
-class _SortButtonsState extends State<SortButtons> {
-  int _selectedValue = 1;
-
+class SortButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Spread the columns evenly
-      children: [
-        Column(
-          children: [
-            CustomRadioButton(
-              context: context,
-              value: 1,
-              groupValue: _selectedValue,
-              onChanged: (int? value) {
-                setState(() {
-                  _selectedValue = value!;
-                });
-              },
-              label: 'Popular',
-            ),
-            CustomRadioButton(
-              context: context,
-              value: 2,
-              groupValue: _selectedValue,
-              onChanged: (int? value) {
-                setState(() {
-                  _selectedValue = value!;
-                });
-              },
-              label: 'Price High to Low',
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            CustomRadioButton(
-              context: context,
-              value: 3,
-              groupValue: _selectedValue,
-              onChanged: (int? value) {
-                setState(() {
-                  _selectedValue = value!;
-                });
-              },
-              label: 'Newest',
-            ),
-            CustomRadioButton(
-              context: context,
-              value: 4,
-              groupValue: _selectedValue,
-              onChanged: (int? value) {
-                setState(() {
-                  _selectedValue = value!;
-                });
-              },
-              label: 'Price Low to High',
-            ),
-          ],
-        ),
-      ],
-    );
+    return BlocBuilder<FilterCubit, FilterState>(
+      builder: (context, state) {
+        int selectedValue = state.sortType;
 
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                CustomRadioButton(
+                  context: context,
+                  value: 1,
+                  groupValue: selectedValue,
+                  onChanged: (int? value) {
+                    if (value != null) {
+                      context.read<FilterCubit>().changeSortType(value);
+                    }
+                  },
+                  label: 'Popular',
+                ),
+                CustomRadioButton(
+                  context: context,
+                  value: 2,
+                  groupValue: selectedValue,
+                  onChanged: (int? value) {
+                    if (value != null) {
+                      context.read<FilterCubit>().changeSortType(value);
+                    }
+                  },
+                  label: 'Price High to Low',
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                CustomRadioButton(
+                  context: context,
+                  value: 3,
+                  groupValue: selectedValue,
+                  onChanged: (int? value) {
+                    if (value != null) {
+                      context.read<FilterCubit>().changeSortType(value);
+                    }
+                  },
+                  label: 'Newest',
+                ),
+                CustomRadioButton(
+                  context: context,
+                  value: 4,
+                  groupValue: selectedValue,
+                  onChanged: (int? value) {
+                    if (value != null) {
+                      context.read<FilterCubit>().changeSortType(value);
+                    }
+                  },
+                  label: 'Price Low to High',
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
@@ -94,26 +94,23 @@ class CustomRadioButton extends StatelessWidget {
         onChanged(value);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width/2 - 30,
-        margin: EdgeInsets.symmetric(vertical: 5.0),
+        width: MediaQuery.of(context).size.width / 2 - 30,
+        margin: const EdgeInsets.symmetric(vertical: 5.0),
         decoration: BoxDecoration(
           color: groupValue == value
-              ? Color(0xFFE1EBFF)
+              ? const Color(0xFFE1EBFF)
               : Colors.grey.withOpacity(0.1),
           borderRadius: BorderRadius.circular(20.0),
         ),
-        padding: EdgeInsets.only(right: 4, top: 4, bottom: 4, left: 10),
+        padding: const EdgeInsets.only(right: 4, top: 4, bottom: 4, left: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // SizedBox(width: 0,),
             Text(
               label,
               style: TextStyle(
                 fontSize: 16.0,
-                color: groupValue == value
-                    ? Colors.blue
-                    : Colors.black
+                color: groupValue == value ? Colors.blue : Colors.black,
               ),
             ),
             Container(
@@ -123,13 +120,12 @@ class CustomRadioButton extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: groupValue == value ? Colors.blue : Colors.transparent,
                 border: Border.all(
-                  color:
-                      groupValue == value ? Colors.white : Colors.transparent,
+                  color: groupValue == value ? Colors.white : Colors.transparent,
                   width: 2.0,
                 ),
               ),
               child: groupValue == value
-                  ? Icon(Icons.check, size: 16.0, color: Colors.white)
+                  ? const Icon(Icons.check, size: 16.0, color: Colors.white)
                   : null,
             ),
           ],

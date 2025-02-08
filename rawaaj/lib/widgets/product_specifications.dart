@@ -2,9 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:rawaaj/widgets/custom_chip.dart';
 
 class ProductSpecifications extends StatelessWidget {
+  final int size;
+  final int color;
+
+  const ProductSpecifications({super.key, required this.size, required this.color});
 
   @override
   Widget build(BuildContext context) {
+    final sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+    final colorNames = [
+      'Grey',
+      'Black',
+      'Blue',
+      'Red',
+      'Teal',
+      'Yellow',
+      'Purple',
+    ];
+
     List<String> materials = ["Cotton 95%", "Nylon 5%"];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,20 +44,17 @@ class ProductSpecifications extends StatelessWidget {
             name: "Origin",
             label: "EU",
             color: Colors.blue.withOpacity(0.1),
-            width: 16
-        ),
+            width: 16),
         buildSpecification(
             name: "Size",
-            label: "M",
+            label: sizes[size-1],
             color: Colors.green.withOpacity(0.1),
-            width: 16
-        ),
+            width: 16),
         buildSpecification(
             name: "Color",
-            label: "Light brown",
+            label: colorNames[color-1],
             color: Colors.grey.withOpacity(0.1),
-            width: 4
-        ),
+            width: 8),
       ],
     );
   }

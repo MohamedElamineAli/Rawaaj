@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: AddFloatingBtn(isProduct: false),
+      floatingActionButton: AddFloatingBtn(isProduct: true),
       backgroundColor: Colors.white,
       appBar: HeaderBar(
         title: "Shop",
@@ -30,8 +30,8 @@ class HomeScreen extends StatelessWidget {
             HorizontalListSection(title: "Top Products", itemsCount: 6),
             SizedBox(height: 16),
             GridSection(title: "New Items", itemsCount: 4),
-            SizedBox(height: 16),
-            FlashSaleSlider(),
+            // SizedBox(height: 16),
+            // FlashSaleSlider(),
             SizedBox(height: 16),
             HorizontalListSection(title: "Recently Viewed", itemsCount: 6),
             SizedBox(height: 16),

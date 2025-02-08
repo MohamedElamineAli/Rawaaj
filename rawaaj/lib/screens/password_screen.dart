@@ -3,7 +3,10 @@ import 'package:pinput/pinput.dart';
 import 'package:rawaaj/screens/main_screen.dart';
 
 class PasswordScreen extends StatelessWidget {
-  const PasswordScreen({super.key});
+  final String username;
+  final String password;
+
+  const PasswordScreen({super.key, required this.username, required this.password});
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +74,10 @@ class PasswordScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      const Center(
+                      Center(
                         child: Text(
-                          'Hello, Mohamed!!',
-                          style: TextStyle(
+                          'Hello, $username!!',
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w600,
                           ),
@@ -94,7 +97,7 @@ class PasswordScreen extends StatelessWidget {
                       const SizedBox(height: 40),
                       Center(
                         child: Pinput(
-                          length: 4,
+                          length: password.length,
                           defaultPinTheme: defaultPinTheme,
                           obscureText: true,
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -108,8 +111,19 @@ class PasswordScreen extends StatelessWidget {
                             ),
                           ),
                           onCompleted: (pin) {
-                            Navigator.push( context, MaterialPageRoute(builder: (context) => MainScreen(),) );
-
+                            if(pin != password) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Wrong password.'),
+                                ),
+                              );
+                              return;
+                            }
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => MainScreen()),
+                                  (Route<dynamic> route) => false, // This removes all previous routes
+                            );
                           },
                         ),
                       ),

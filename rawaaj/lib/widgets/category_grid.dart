@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../screens/specific_shop_screen.dart';
 import 'section_header.dart';
 
@@ -8,30 +9,30 @@ class CategoryGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> categories = [
-      "Shirts",
       "Jackets",
-      "Shoes",
-      "Suits",
       "Jeans",
-      "Sportswear"
+      "Shirts",
+      "Shoes",
+      "Sportswear",
+      "Suits",
     ];
 
     List<String> categoriesImg = [
-      "assets/images/shirt ",
-      "assets/images/jacket ",
-      "assets/images/shoe ",
-      "assets/images/suit ",
-      "assets/images/jean ",
-      "assets/images/sportwear "
+      "assets/images/jacket",
+      "assets/images/jean",
+      "assets/images/shirt",
+      "assets/images/shoe",
+      "assets/images/sportwear",
+      "assets/images/suit"
     ];
 
     List<String> categoriesImgsExe = [
       "webp",
+      "jpg",
       "webp",
       "webp",
-      "jpg",
-      "jpg",
-      "webp"
+      "webp",
+      "jpg"
     ];
 
     return Padding(
@@ -53,7 +54,15 @@ class CategoryGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.push( context, MaterialPageRoute(builder: (context) => SpecificShopScreen(name: categories[index])), );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SpecificShopScreen(
+                        name: categories[index],
+                        categoryNum: index+1,
+                      ),
+                    ),
+                  );
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -67,48 +76,39 @@ class CategoryGrid extends StatelessWidget {
                       ),
                     ],
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: GridView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 0.5,
-                              mainAxisSpacing: 0.5,
-                            ),
-                            itemCount: 4,
-                            itemBuilder: (context, index2) {
-                              print(categoriesImg[index] + "($index2)." + categoriesImgsExe[index]);
-                              return categoryImg(categoriesImg[index] + "(${index2 + 1})." + categoriesImgsExe[index]);
-                            },
-                          ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: categoryImagesGrid(
+                          basePath: categoriesImg[index],
+                          extension: categoriesImgsExe[index],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                categories[index],
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              categories[index],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Container(
-                                child: Text("564",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold)),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            ),
+                            Text(
+                              "564",
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               );
@@ -119,18 +119,33 @@ class CategoryGrid extends StatelessWidget {
     );
   }
 
-  Widget categoryImg(String img) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 5.0, top: 5),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: Image.asset(
-            img,
-            fit: BoxFit.fill,
-          ),
-        ),
+  Widget categoryImagesGrid({required String basePath, required String extension}) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 4.0,
+        mainAxisSpacing: 4.0,
       ),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        final imgPath = "$basePath (${index + 1}).$extension";
+        return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: Image.asset(
+              imgPath,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Icon(
+                Icons.broken_image,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

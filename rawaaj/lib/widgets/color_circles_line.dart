@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rawaaj/widgets/color_circle.dart';
+import '../cubit/filter_cubit.dart';
 
-class ColorCirclesLine extends StatefulWidget {
-  ColorCirclesLine({Key? key}) : super(key: key);
-
-  @override
-  State<ColorCirclesLine> createState() => _ColorCirclesLineState();
-}
-
-class _ColorCirclesLineState extends State<ColorCirclesLine> {
-  int selected = 0;
+class ColorCirclesLine extends StatelessWidget {
+  const ColorCirclesLine({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,22 +15,26 @@ class _ColorCirclesLineState extends State<ColorCirclesLine> {
       Colors.red,
       Colors.teal,
       Colors.amber,
-      Colors.purple
+      Colors.purple,
     ];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        for (int i = 0; i < colorTypes.length; i++)
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                selected = i;
-              });
-            },
-            child: ColorCircle(color: colorTypes[i], isSelected: i == selected),
-          ),
-      ],
+    return BlocBuilder<FilterCubit, FilterState>(
+      builder: (context, state) {
+        int selected = state.color;
+
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            for (int i = 0; i < colorTypes.length; i++)
+              GestureDetector(
+                onTap: () {
+                  context.read<FilterCubit>().changeColor(i);
+                },
+                child: ColorCircle(color: colorTypes[i], isSelected: i == selected),
+              ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rawaaj/constants/default_cubit_product.dart';
 import 'package:rawaaj/widgets/review_line.dart';
 import 'package:rawaaj/widgets/sub_screen_app_bar.dart';
 
@@ -15,7 +16,7 @@ class ReviewsScreen extends StatelessWidget {
         child: ListView.builder(
             itemCount: 20,
             itemBuilder: (context, index) => ReviewLine(
-                img: "assets/images/grey.png",
+                img: greyImage,
                 name: "Person $index",
                 rating: (index + 2) % 6,
                 comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...")

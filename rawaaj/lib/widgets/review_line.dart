@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:rawaaj/widgets/circular_img.dart';
 import 'package:rawaaj/widgets/rating_row.dart';
 
 class ReviewLine extends StatelessWidget {
-  final String img;
+  final File img;
   final String name;
   final double rating;
   final String comment;
